@@ -11,5 +11,7 @@ Le champ role peut avoir l’une de ces trois valeurs (admin, author ou guest).<
 	● Express :framework web (le projet sera généré à l’aide la CLI express-generator)
 	● Sequelize : ORM (Object Relational Mapping) avec le driver mysql ( mysql2)
 	● Visual Studio Code avec l’extension Rest Client pour tester les routes
+# Rapport :	
+[Rapport_web_Blog.pdf](https://github.com/Amina-contact/Application-Web-Blog-/files/8006149/Rapport_web_Blog.pdf)
 
 
