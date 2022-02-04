@@ -1,0 +1,177 @@
+<html>
+
+<head>
+  <title>My Blog</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+  integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+  integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+  crossorigin="anonymous"></script>
+  <style>
+    table.table td a.add {
+      color: #27C46B;
+    }
+    table.table td .add {
+      display: none;
+    }
+    a.add {
+      font-size: 24px;
+      margin-right: -1px;
+      position: relative;
+      top: 3px;
+    }
+  </style>
+  <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+      var actions = $("table td:last-child").html();
+      var id = 1;
+      // Append table with add row form on add new button click
+      $(".add-new").click(function(){
+          $(this).attr("disabled", "disabled");
+          var index = $("table tbody tr:last-child").index();
+          var row = '<tr>' +
+              '<td>'+ id++ +'</td>' +
+              '<td><input type="text" class="form-control" name="Username" id="username"></td>' +
+              '<td><input type="text" class="form-control" name="Email" id="email"></td>' +
+              '<td><input type="text" class="form-control" name="Password" id="password"></td>' +
+              '<td><input type="text" class="form-control" name="Role" id="role"></td>' +
+              '<td>'+
+                  '<button type= button id=trois class="add" title="Add" data-toggle="tooltip"onclick="creerUser()" style="margin-right:15px"><i class="material-icons">&#xE03B;</i></button>'+ 
+                  '<button type= button id=trois class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></button> </td>' 
+          '</tr>';
+          $("table").append(row);     
+          $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+          $('[data-toggle="tooltip"]').tooltip();
+      });
+      // Add row on add button click
+      $(document).on("click", ".add", function(){
+          var empty = false;
+          var input = $(this).parents("tr").find('input[type="text"]');
+          input.each(function(){
+              if(!$(this).val()){
+                  $(this).addClass("error");
+                  empty = true;
+              } else{
+                  $(this).removeClass("error");
+              }
+          });
+          $(this).parents("tr").find(".error").first().focus();
+          if(!empty){
+              input.each(function(){
+                  $(this).parent("td").html($(this).val());
+              });         
+              $(this).parents("tr").find(".add, .edit").toggle();
+              $(".add-new").removeAttr("disabled");
+          }       
+      });
+      // Edit row on edit button click
+      $(document).on("click", ".edit", function(){        
+          $(this).parents("tr").find("td:not(:last-child)").each(function(){
+              $(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+          });     
+          $(this).parents("tr").find(".add, .edit").toggle();
+          $(".add-new").attr("disabled", "disabled");
+      });
+      // Delete row on delete button click
+      $(document).on("click", ".delete", function(){
+          $(this).parents("tr").remove();
+          $(".add-new").removeAttr("disabled");
+      });
+  });
+  </script>
+</head>
+
+<body onload="showPaginatedUsers()"  >
+  <div class="card shadow-sm p-2" style="background-color: #DAD3C6 ;">
+      <h1 style="text-align: center;">Espace Administratif </h1>
+
+      <div class="card-body" >
+        <div class="card  shadow-sm p-2 my-3"  style="border-radius: 45px;">
+            <h4 style="margin-left: 20px; margin-top: 10px;">Add user </h4>
+          <div class="card-body">
+            <form>
+              <input type="hidden" id="userId">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="username..." required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="email..." required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="password" placeholder="password..." required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-control" id="role">
+                      <option value="admin">Admin</option>
+                      <option value="author">Author</option>
+                      <option value="guest">Guest</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button class="btn float-right" id="addBtn" style="background-color: #E89B19 ;" onclick="creerUser()">Add <span class="fa fa-plus"></span></button>
+              <button class="btn btn-warning float-right" id="updateBtn" onclick="updateUser(event)">Update <span class="fa fa-edit"></span></button> 
+            </form>
+           
+            </div>
+        </div>
+        <div id="pageCard">
+
+        </div>
+        <table class="table" style="background-color: #DAD3C6 ;">
+          <thead class="thead-dark" style="width: 900px;">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Username</th>
+              <th scope="col">Password</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col" colspan="2" style="text-align: center;">Actions</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="usersList">
+      
+            </tbody>
+            </table>
+            
+      </div>
+      <div class="row mt-2" style="padding-left: 400px;">
+                <button type="button" class="btn btn-light" onclick="get_page(--i)">Précedent</button>
+                <button type="button" class="btn btn-light" onclick="get_page(++i)"> Suivant </button>      
+            </div>
+  </div>
+ 
+ 
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src ='/javascripts/javscript.js'></script>
+</body>
+
+</html>

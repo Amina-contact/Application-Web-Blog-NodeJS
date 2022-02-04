@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.material-icons{
+  color:#FCA310;
+}
+#modifier{
+  border: #FCA310;
+}
+.btn-light{
+  border: #b4b4b4 1px solid;
+  font-weight: bolder;
+  font-size: 18px;
+  cursor: pointer;
+  float: right;
+  border-radius: 5px;
+  position: relative;
+  margin: 5px;
+  width: 120px;
+}
