@@ -13,5 +13,9 @@ Le champ role peut avoir l’une de ces trois valeurs (admin, author ou guest).<
 	● Visual Studio Code avec l’extension Rest Client pour tester les routes
 # Rapport :	
 [Rapport_web_Blog.pdf](https://github.com/Amina-contact/Application-Web-Blog-/files/8006149/Rapport_web_Blog.pdf)
+# 
+![ajout](https://user-images.githubusercontent.com/98979712/152601156-65fb9868-8ab3-4bf1-9d58-e4b8aadf99a7.PNG)
+# 
+![listeUsers](https://user-images.githubusercontent.com/98979712/152601164-a6328409-fa4c-45e0-a975-194c1dc4389c.PNG)
 
 
